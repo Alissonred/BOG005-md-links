@@ -1,6 +1,11 @@
 const path = require('path');
+const fs = require('fs');// importo modulo fs
+const funcionLeerRuta = require ('./funcionLeerRuta.js');
+const funcionEvaluarAbs = require('./funcionEvaluarAbs.js');
+const funcionValidarCarpetaOArchivo = require('./funcionValidarCarpetaOArchivo.js')
+const funcionValidarExtension = require('./funcionValidarExtension.js');
+const funcionValidarDirectorio = require('./funcionValidarDirectorio.js');
 const mdlinks = (path, options)=>{
-////////////////////////////////logica y pasos dividiendo en fichas
 //obtener parametros (eso lo hace el cli)
 //validar si existe ruta (fs.stats)
 //validar si es ruta absoluta

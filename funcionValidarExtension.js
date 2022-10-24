@@ -10,9 +10,10 @@ function extValidate(ruta){
     ////guarde en array archivo md
    }
    else{
-    console.log('el archivo no es .md');
+    console.log('el archivo no es .md, SE VA AL FIN');
    }
     return ext
 }
 
 extValidate(rutaPrueba);
+module.exports = extValidate;
