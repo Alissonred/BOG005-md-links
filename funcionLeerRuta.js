@@ -7,7 +7,7 @@ function existRoute(ruta) {
             console.log('la ruta existe');
         }
         else {
-            console.log('la ruta no existe');
+            console.log('la ruta no existe,  SE VA AL FIN');
         }
     })
 }

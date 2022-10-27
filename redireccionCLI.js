@@ -1,10 +1,8 @@
-/* module.exports = () => {
-  // ...
-};
- */
-//////tomo valores e inicializo//////////
+
+//const mdExectuted = require('./funcion.js');
 const options = process.argv;/// array con los procesos que está corriendo [node,archivo js, path, comando1, comando2]
 const file = options[2]
+console.log(options)
 let validateValue = false; // valor por defecto
 let statsValue = false;// valor por defecto
 //// evaluo valores como casos aislados////////

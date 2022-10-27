@@ -5,9 +5,10 @@ const funcionEvaluarAbs = require('./funcionEvaluarAbs.js');
 const funcionValidarCarpetaOArchivo = require('./funcionValidarCarpetaOArchivo.js')
 const funcionValidarExtension = require('./funcionValidarExtension.js');
 const funcionValidarDirectorio = require('./funcionValidarDirectorio.js');
-const mdlinks = (path, options)=>{
-//obtener parametros (eso lo hace el cli)
+
+const mdlinks = (path, options= {validate: true})=>{
 //validar si existe ruta (fs.stats)
+funcionLeerRuta()
 //validar si es ruta absoluta
 // volver la ruta absoluta
 //leer extensioon de archivo 
