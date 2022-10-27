@@ -1,6 +1,6 @@
 const fs = require('fs');// importo modulo fs
 const path = require('path');
-const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\Users\\322DesktopAR GENERALESBASESCOURSESFORMALLABORATORIAPROY 4 MDLINKS NODEBOG005-md-linkscarpetaPrueba' ;
+const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba' ;
 /* function existRoute(ruta) {
     return new Promise ((resolve, reject)=>{
         fs.stat(ruta, (error, stats) => {
@@ -17,35 +17,28 @@ const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FOR
     })
 } */
 function absoluteValidate (ruta) {
-    console.log('ruta inicial: ', ruta)
     return path.isAbsolute(ruta) ? ruta : path.resolve(ruta) 
 } 
 function validateFileOrFolder(ruta) {
     if (fs.statSync(ruta).isFile()) {
         return 'file'
     }
-    if (fs.statSync(ruta).isDirectory()) {
+    else if (fs.statSync(ruta).isDirectory()) {
         return 'directory'
     }
+    else{
         return 'err'
+    }
+       
     
 }
 function extValidate(ruta){
-    let ext = path.extname(ruta);
-    //console.log(ext);
-    if(ext == '.md'){
-     //console.log('el archivo es .md');
-     
-    }
-    else{
-     //console.log('el archivo no es .md, SE VA AL FIN');
-    }
-     return ext 
+    return path.extname(ruta) ==='.md' ? 'ext.md': 'noext.md'
  }
 function directoryFileValidate(ruta){
     let fileChildren = fs.readdirSync(ruta);
-    fileChildren.forEach(()=>{
-        //valide si es md
+    fileChildren.forEach((archivo)=>{
+
     })
  return fileChildren
 }
@@ -67,10 +60,10 @@ function recursionValidate(ruta){
         })
     }
 }
-//existRoute(rutaPrueba).then(res => console.log(res))// ahi
-//console.log(absoluteValidate(rutaPrueba));
-console.log(validateFileOrFolder('C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\Users\\322DesktopAR GENERALESBASESCOURSESFORMALLABORATORIAPROY 4 MDLINKS NODEBOG005-md-linkscarpetaPrueba'));
-//console.log(extValidate(rutaPrueba));
-//console.log(directoryFileValidate(rutaPrueba));
+//existRoute(rutaPrueba).then(res => console.log(res))// okkkk
+//console.log(absoluteValidate(rutaPrueba)); // okkk
+console.log(validateFileOrFolder(rutaPrueba)); /// okkk con rutas \\
+//console.log(extValidate(rutaPrueba)); /// okkk
+console.log(directoryFileValidate(rutaPrueba));
 //console.log(recursionValidate(rutaPrueba));
 //module.exports = existRoute;

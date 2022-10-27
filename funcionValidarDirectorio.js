@@ -25,15 +25,23 @@ directoryFileValidate(rutaPrueba);
 
 const fs = require('fs');// importo modulo fs
 const path = require('path');////modulo para usar metodos de rutas
-fs.readdir('C:\\Users\\57322\\Desktop\\AR GENERALES', (error, archivos)=> {
-  console.log(archivos);
-  /* archivos.forEach((archivo)=>{
-    if(!error){
-      console.log(archivo);
-    }
-    else {
-      console.log('hay un error', error)
-    }
-  } */
-  //)
-})
+const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES';
+function leerDirectorio(ruta) {
+  return new Promise((resolve, reject) => {
+    fs.readdir(ruta, (error, archivos) => {
+      console.log(archivos);
+      archivos.forEach((archivo) => {
+        if (!error) {
+          resolve(path.extname(archivo) === '.md' ? 'ext.md' : 'noext.md')
+        }
+        else {
+          console.log('hay un error', error)
+          reject(error)
+        }
+      }
+      )
+    })
+  })
+}
+
+leerDirectorio(rutaPrueba).then(res => console.log(res))
