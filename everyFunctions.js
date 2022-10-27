@@ -33,37 +33,40 @@ function validateFileOrFolder(ruta) {
     
 }
 function extValidate(ruta){
-    return path.extname(ruta) ==='.md' ? 'ext.md': 'noext.md'
+    return path.extname(ruta) ==='.md' ? '.md': 'noext.md'
  }
 function directoryFileValidate(ruta){
     let fileChildren = fs.readdirSync(ruta);
-    fileChildren.forEach((archivo)=>{
-
-    })
  return fileChildren
 }
+
 function recursionValidate(ruta){
-    //verif absolutez: absoluteValidate (ruta)
     let arrayMdFile =[]; // declaro array donde guardaré archivos md
+    let rutaAbsoluta = absoluteValidate(ruta) // convierto en absoluta
     ///evaluo caso y redirecciono
-    if(fs.stat(ruta).isFile){  // evaluo si es un archivo
-        if(path.extname(ruta) === '.md'){
-            arrayMdFile.push(ruta)//pushee la ruta
+    if(validateFileOrFolder(rutaAbsoluta) =='file'){  // evaluo si es un archivo
+        if(extValidate(rutaAbsoluta) === '.md'){
+            arrayMdFile.push(rutaAbsoluta)//pushee la ruta
         }
         else{
-            console.log('el archivo no es  .md');
+            console.log('el archivo no es .md');
         }
     }
-    else if(fs.stat(ruta).isDirectory){ // evaluo si es un directorio
-        let fileChildren = fs.readdirSync(ruta);
+    else if(validateFileOrFolder(rutaAbsoluta) =='directory'){ // evaluo si es un directorio
+        let fileChildren = directoryFileValidate(rutaAbsoluta);
         fileChildren.forEach((doc)=>{//para cada uno de los archivos
+            let proofDirectory = path.join(rutaAbsoluta, doc)// uniendo ruta madre con el hijo
+            //console.log(doc);
+            arrayMdFile = arrayMdFile.concat(recursionValidate(proofDirectory)) //concatene a array la func app en hijo
         })
+        
     }
+    return arrayMdFile
 }
 //existRoute(rutaPrueba).then(res => console.log(res))// okkkk
 //console.log(absoluteValidate(rutaPrueba)); // okkk
-console.log(validateFileOrFolder(rutaPrueba)); /// okkk con rutas \\
+//console.log(validateFileOrFolder(rutaPrueba)); /// okkk con rutas \\
 //console.log(extValidate(rutaPrueba)); /// okkk
-console.log(directoryFileValidate(rutaPrueba));
-//console.log(recursionValidate(rutaPrueba));
+//console.log(directoryFileValidate(rutaPrueba));
+console.log(recursionValidate(rutaPrueba));
 //module.exports = existRoute;
