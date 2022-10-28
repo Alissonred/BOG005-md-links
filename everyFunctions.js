@@ -35,10 +35,6 @@ function validateFileOrFolder(ruta) {
 function extValidate(ruta){
     return path.extname(ruta) ==='.md' ? '.md': 'noext.md'
  }
-function directoryFileValidate(ruta){
-    let fileChildren = fs.readdirSync(ruta);
- return fileChildren
-}
 
 function recursionValidate(ruta){
     let arrayMdFile =[]; // declaro array donde guardaré archivos md
@@ -53,13 +49,12 @@ function recursionValidate(ruta){
         }
     }
     else if(validateFileOrFolder(rutaAbsoluta) =='directory'){ // evaluo si es un directorio
-        let fileChildren = directoryFileValidate(rutaAbsoluta);
+        let fileChildren = fs.readdirSync(rutaAbsoluta);
         fileChildren.forEach((doc)=>{//para cada uno de los archivos
             let proofDirectory = path.join(rutaAbsoluta, doc)// uniendo ruta madre con el hijo
             //console.log(doc);
-            arrayMdFile = arrayMdFile.concat(recursionValidate(proofDirectory)) //concatene a array la func app en hijo
+            arrayMdFile = arrayMdFile.concat(recursionValidate(proofDirectory))//concat a array la ejec d func app en hijo
         })
-        
     }
     return arrayMdFile
 }
