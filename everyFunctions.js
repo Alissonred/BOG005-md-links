@@ -1,5 +1,6 @@
 const fs = require('fs');// importo modulo fs
 const path = require('path');
+const axiosHttp =require('axios');
 const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba' ;
 const rutaPruebaFile = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md' ;
 /* function existRoute(ruta) {
@@ -78,9 +79,7 @@ function readFileMd(rutaIndividual){
 
 function EveryOneMd(ruta){
     let arrayPromises = [];
-    let arrayMds = recursionValidate(ruta); // array de mds
-    console.log(arrayMds);        
-
+    let arrayMds = recursionValidate(ruta); // array de mds     
      arrayMds.forEach((file)=>{
         arrayPromises.push(readFileMd(file))  // arreglo de promesas, la lec de cu de los arch genera una promesa
      })
@@ -108,6 +107,30 @@ function getOneLink(file, ruta){
     }
     return arrayLinks
 }
+
+function validateHttpOne(objLinkToValidate){// recibe todo el objeto
+    axiosHttp.get(objLinkToValidate.href).then((res)=>{
+        objLinkToValidate.status = res.status;// codigos de estado http
+        objLinkToValidate.ok = 'ok';
+        //linkToValidate.statusOk = "ok";
+        console.log(objLinkToValidate);
+    }).catch((error)=>{
+        objLinkToValidate.ok = 'fail';
+    }).finally(()=>{
+        console.log('SE HA TERMINADO EL PROCESO DE VALIDACIÓN');
+    })  
+}
+function EveryOneValidateHttp(arrayObjlinks){
+    let validateStatePromises=[];
+    //console.log(arrayObjlinks);
+    //let arrayLinksToValidate= //ARRAY DE LINKS (TRAIDO DE OBJETOS???)
+    arrayObjlinks.forEach((link)=>{
+        validateStatePromises.push(validateHttpOne(link))///VALIDARLOS CON VALIDATE ONE 
+        //console.log(link.href);
+    })
+return Promise.all(validateStatePromises)// ARRAY DE PROMESAS  
+}
+
 //existRoute(rutaPrueba).then(res => console.log(res))// okkkk
 //console.log(absoluteValidate(rutaPrueba)); // okkk
 //console.log(validateFileOrFolder(rutaPrueba)); /// okkk con rutas \\
@@ -115,5 +138,8 @@ function getOneLink(file, ruta){
 //console.log(directoryFileValidate(rutaPrueba));
 //console.log(recursionValidate(rutaPrueba));
 //readFileMd(rutaPruebaFile).then(res => console.log(res))
-EveryOneMd(rutaPrueba).then(res => console.log(res.flat())) // el resultado de la promesa lo vuelvo 1 solo array
+EveryOneMd(rutaPrueba).then(res => {
+    EveryOneValidateHttp(res.flat())// retorna
+    //console.log(res.flat()) // el resultado de la promesa lo vuelvo 1 solo array
+}) 
 //module.exports = existRoute;
