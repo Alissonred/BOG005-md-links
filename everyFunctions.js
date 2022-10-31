@@ -61,14 +61,16 @@ function recursionValidate(ruta){
 }
 
 function readFileMd(ruta){
- return new Promise((resolve,reject)=>{
+ return new Promise((resolve, reject)=>{
     fs.readFile(ruta , 'utf8', (error, data)=> {
          if(error){
             console.log(error);
          }
          else{
-            resolve(data)/// MATCH EXPRES(DETECTE LINK), CREAR OBJ Y LLENAR ATRIB, PUSH DE OBJETO A ARRAY
-         }
+            const link = getOneLink(data, ruta) /// MATCH EXPRES(DETECTE LINK), CREAR OBJ Y LLENAR ATRIB, PUSH DE OBJETO A ARRAY
+            resolve(link)
+            
+        }
     });
  })
 }
@@ -88,12 +90,35 @@ return new Promise((resolve, reject)=>{
 
 }
 
+function getOneLink(file, ruta){
+    let foundFile = file.match(/\[.*\]\(https:\/\/[\w\-\.]+\/.*\)/g); /// patron escrito+link, .match lo devuelve en array
+    //console.log(foundFile);
+    let arrayLinks =[];
+    if(foundFile){///si hay links
+        foundFile.forEach((link)=>{
+        arrayLinks.push({
+        href: link.match(/https:\/\/.*[^)]/g).toString(),// porque la devolución es en array
+        text: link.match(/\[.*\]/g).toString(),// porque la devolución es en array
+        file: ruta,    
+        })
+        })
+    }
+    else{
+        arrayLinks.push({
+            href: 'No hay URL',// porque la devolución es en array
+            text: 'No hay texto de URL',// porque la devolución es en array
+            file: ruta,    
+            })
+    }
+
+    return arrayLinks
+}
 //existRoute(rutaPrueba).then(res => console.log(res))// okkkk
 //console.log(absoluteValidate(rutaPrueba)); // okkk
 //console.log(validateFileOrFolder(rutaPrueba)); /// okkk con rutas \\
 //console.log(extValidate(rutaPrueba)); /// okkk
 //console.log(directoryFileValidate(rutaPrueba));
 //console.log(recursionValidate(rutaPrueba));
-//readFileMd(rutaPruebaFile).then(res => console.log(res))
-EveryOneMd(rutaPrueba).then(res => console.log(res))
+readFileMd(rutaPruebaFile).then(res => console.log(res))
+//EveryOneMd(rutaPrueba).then(res => console.log(res))
 //module.exports = existRoute;
