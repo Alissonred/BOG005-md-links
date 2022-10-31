@@ -60,14 +60,14 @@ function recursionValidate(ruta){
     return arrayMdFile
 }
 
-function readFileMd(ruta){
+function readFileMd(rutaIndividual){
  return new Promise((resolve, reject)=>{
-    fs.readFile(ruta , 'utf8', (error, data)=> {
+    fs.readFile(rutaIndividual , 'utf8', (error, data)=> {
          if(error){
             console.log(error);
          }
          else{
-            const link = getOneLink(data, ruta) /// MATCH EXPRES(DETECTE LINK), CREAR OBJ Y LLENAR ATRIB, PUSH DE OBJETO A ARRAY
+            const link = getOneLink(data, rutaIndividual) /// MATCH EXPRES(DETECTE LINK), CREAR OBJ Y LLENAR ATRIB, PUSH DE OBJETO A ARRAY
             resolve(link)
             
         }
@@ -77,22 +77,18 @@ function readFileMd(ruta){
 /// PENDIENTE FUNCION QUE RECORRA ARCHIVOS MD QUE RETORNE RUTA DE 1 ARCHIVO UNICAMENTE
 
 function EveryOneMd(ruta){
-    let arrayAllLinks = [];
+    let arrayPromises = [];
     let arrayMds = recursionValidate(ruta); // array de mds
     console.log(arrayMds);        
-return new Promise((resolve, reject)=>{
-     arrayMds.forEach((file)=>{
-        arrayAllLinks.push(readFileMd(file).then())  // en cada uno de los mds lea y empuje// probl .then???
-     })
-    resolve(arrayAllLinks)
-    console.log(arrayAllLinks);
-})
 
+     arrayMds.forEach((file)=>{
+        arrayPromises.push(readFileMd(file))  // arreglo de promesas, la lec de cu de los arch genera una promesa
+     })
+return Promise.all(arrayPromises) // retorno un array de promesas
 }
 
 function getOneLink(file, ruta){
     let foundFile = file.match(/\[.*\]\(https:\/\/[\w\-\.]+\/.*\)/g); /// patron escrito+link, .match lo devuelve en array
-    //console.log(foundFile);
     let arrayLinks =[];
     if(foundFile){///si hay links
         foundFile.forEach((link)=>{
@@ -110,7 +106,6 @@ function getOneLink(file, ruta){
             file: ruta,    
             })
     }
-
     return arrayLinks
 }
 //existRoute(rutaPrueba).then(res => console.log(res))// okkkk
@@ -119,6 +114,6 @@ function getOneLink(file, ruta){
 //console.log(extValidate(rutaPrueba)); /// okkk
 //console.log(directoryFileValidate(rutaPrueba));
 //console.log(recursionValidate(rutaPrueba));
-readFileMd(rutaPruebaFile).then(res => console.log(res))
-//EveryOneMd(rutaPrueba).then(res => console.log(res))
+//readFileMd(rutaPruebaFile).then(res => console.log(res))
+EveryOneMd(rutaPrueba).then(res => console.log(res.flat())) // el resultado de la promesa lo vuelvo 1 solo array
 //module.exports = existRoute;
