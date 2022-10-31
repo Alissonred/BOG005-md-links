@@ -1,6 +1,7 @@
 const fs = require('fs');// importo modulo fs
 const path = require('path');
 const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba' ;
+const rutaPruebaFile = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md' ;
 /* function existRoute(ruta) {
     return new Promise ((resolve, reject)=>{
         fs.stat(ruta, (error, stats) => {
@@ -58,10 +59,41 @@ function recursionValidate(ruta){
     }
     return arrayMdFile
 }
+
+function readFileMd(ruta){
+ return new Promise((resolve,reject)=>{
+    fs.readFile(ruta , 'utf8', (error, data)=> {
+         if(error){
+            console.log(error);
+         }
+         else{
+            resolve(data)/// MATCH EXPRES(DETECTE LINK), CREAR OBJ Y LLENAR ATRIB, PUSH DE OBJETO A ARRAY
+         }
+    });
+ })
+}
+/// PENDIENTE FUNCION QUE RECORRA ARCHIVOS MD QUE RETORNE RUTA DE 1 ARCHIVO UNICAMENTE
+
+function EveryOneMd(ruta){
+    let arrayAllLinks = [];
+    let arrayMds = recursionValidate(ruta); // array de mds
+    console.log(arrayMds);        
+return new Promise((resolve, reject)=>{
+     arrayMds.forEach(()=>{
+       arrayAllLinks.push(readFileMd(ruta).then())  // en cada uno de los mds lea y empuje// probl .then???
+     })
+    resolve(arrayAllLinks)
+    console.log(arrayAllLinks);
+})
+
+}
+
 //existRoute(rutaPrueba).then(res => console.log(res))// okkkk
 //console.log(absoluteValidate(rutaPrueba)); // okkk
 //console.log(validateFileOrFolder(rutaPrueba)); /// okkk con rutas \\
 //console.log(extValidate(rutaPrueba)); /// okkk
 //console.log(directoryFileValidate(rutaPrueba));
-console.log(recursionValidate(rutaPrueba));
+//console.log(recursionValidate(rutaPrueba));
+//readFileMd(rutaPruebaFile).then(res => console.log(res))
+EveryOneMd(rutaPrueba).then(res => console.log(res))
 //module.exports = existRoute;
