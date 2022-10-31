@@ -79,8 +79,8 @@ function EveryOneMd(ruta){
     let arrayMds = recursionValidate(ruta); // array de mds
     console.log(arrayMds);        
 return new Promise((resolve, reject)=>{
-     arrayMds.forEach(()=>{
-       arrayAllLinks.push(readFileMd(ruta).then())  // en cada uno de los mds lea y empuje// probl .then???
+     arrayMds.forEach((file)=>{
+        arrayAllLinks.push(readFileMd(file).then())  // en cada uno de los mds lea y empuje// probl .then???
      })
     resolve(arrayAllLinks)
     console.log(arrayAllLinks);
