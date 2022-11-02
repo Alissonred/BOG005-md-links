@@ -146,9 +146,9 @@ function statsLinks(arrayObjlinks){
 //console.log(directoryFileValidate(rutaPrueba));
 //console.log(recursionValidate(rutaPrueba));
 //readFileMd(rutaPruebaFile).then(res => console.log(res))
-EveryOneMd(rutaPrueba).then(res => {
+/* EveryOneMd(rutaPrueba).then(res => {
     EveryOneValidateHttp(res.flat()).then(res => console.log(res, 'es lo de abajo'))// retorna
     //console.log(res.flat()) // el resultado de la promesa lo vuelvo 1 solo array
-})
+}) */
 
 module.exports = {absoluteValidate, validateFileOrFolder, extValidate, recursionValidate, readFileMd, EveryOneMd, getOneLink, validateHttpOne, EveryOneValidateHttp, statsLinks}
