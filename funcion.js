@@ -13,11 +13,11 @@ const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FOR
 
 
 const mdlinks = (route/* , options= {validate: true} */)=>{
-//////traer funciones
+//////traer funciones/////////////////////////////////////////
  let rutaAbsoluta = absoluteValidate(route);//vuelve abs
  let recursionValidacion = recursionValidate(rutaAbsoluta)//devueve array de .md
  let deteccionLinks = EveryOneMd(rutaAbsoluta).then(res =>{
-  //if(res.length ===0 ){ resolve('no se encontraron links')}
+  if(res.length ===0 ){ resolve('no se encontraron links')}
   EveryOneValidateHttp(res.flat()).then(res => console.log(res))
 })
 console.log(recursionValidacion);
@@ -26,7 +26,7 @@ console.log(recursionValidacion);
 /////////
 return deteccionLinks
 }
-mdlinks(rutaPruebaMD)
+mdlinks(rutaPrueba)
 
 
 
