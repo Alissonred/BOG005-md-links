@@ -32,16 +32,15 @@ function validateFileOrFolder(ruta) {
     else {
         return 'err'
     }
-
-
 }
+
 function extValidate(ruta) {
     return path.extname(ruta) === '.md' ? '.md' : 'noext.md'
 }
 
-function recursionValidate(ruta) {
+function recursionValidate(rutaAbsoluta) {
     let arrayMdFile = []; // declaro array donde guardaré archivos md
-    let rutaAbsoluta = absoluteValidate(ruta) // convierto en absoluta
+    //let rutaAbsoluta = absoluteValidate(ruta) // convierto en absoluta
     ///evaluo caso y redirecciono
     if (validateFileOrFolder(rutaAbsoluta) == 'file') {  // evaluo si es un archivo
         if (extValidate(rutaAbsoluta) === '.md') {
@@ -77,9 +76,9 @@ function readFileMd(rutaIndividual) {
     })
 }
 
-function EveryOneMd(ruta) {
+function EveryOneMd(arrayMds) {//recibe un array de rutas de archivos md
     let arrayPromises = [];
-    let arrayMds = recursionValidate(ruta); // array de mds     
+    //let arrayMds = recursionValidate(ruta); // array de mds     
     arrayMds.forEach((file) => {
         arrayPromises.push(readFileMd(file))  // arreglo de promesas, la lec de cu de los arch genera una promesa
     })
@@ -136,7 +135,7 @@ function statsLinks(arrayObjlinks){
     let Total = arrayObjlinks.Length;
     let Unique = arrayObjlinks.Length;
     ///pte añadir los broken
-}
+  }
 
 
 //existRoute(rutaPrueba).then(res => console.log(res))// okkkk
@@ -146,7 +145,7 @@ function statsLinks(arrayObjlinks){
 //console.log(directoryFileValidate(rutaPrueba));
 //console.log(recursionValidate(rutaPrueba));
 //readFileMd(rutaPruebaFile).then(res => console.log(res))
-/* EveryOneMd(rutaPrueba).then(res => {
+/* EveryOneMd(recursionValidate(rutaPrueba)).then(res => {
     EveryOneValidateHttp(res.flat()).then(res => console.log(res, 'es lo de abajo'))// retorna
     //console.log(res.flat()) // el resultado de la promesa lo vuelvo 1 solo array
 }) */
