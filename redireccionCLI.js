@@ -1,7 +1,8 @@
 
 //const mdExectuted = require('./funcion.js');
-const { mdLinks } = require('./funcion.js')
-const { statsLinks } = require('./everyFunctions.js')
+//const { mdLinks } = require('./funcion.js')
+//const { statsLinks } = require('./everyFunctions.js')
+const { cliMdLinks } = require('./CLI.js')
 
 //const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba';
 //const rutaPruebaFile = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md';
@@ -13,7 +14,7 @@ console.log(opciones, 'es options')
 let validateValue = false; // valor por defecto
 let statsValue = false;// valor por defecto
 
-function cliMdLinks(file, options) {
+/* function cliMdLinks(file, options) {
   //// evaluo valores como casos aislados////////
   if (options[3] === '--validate' || options[4] === '--validate') {
     validateValue = true;
@@ -29,8 +30,8 @@ function cliMdLinks(file, options) {
   if (validateValue === true && statsValue === true) {
     //console.log('llamar a funcion con todo');
     mdLinks(file, { validate: true }).then(res=> {
-      console.log(statsLinks(res))});
-    //statsLinks();/// verificar
+      console.log(res, statsLinks(res),'ejecutar ambas funciones')});
+    
   }
   else if (validateValue === false && statsValue === false) {
     //console.log('ejecutar funcion por defecto');
@@ -46,10 +47,10 @@ function cliMdLinks(file, options) {
     mdLinks(file, { validate: false }).then(res=> {
       let estadisticas = statsLinks(res)
       delete estadisticas.Broken;
-      console.log(estadisticas,'llamar funcion con validate false y calcular stats');
+      console.log(estadisticas, 'llamar funcion con stats solamente');
     });
   }
 
 }
+ */
 cliMdLinks(ruta, opciones)
-module.exports = {cliMdLinks}

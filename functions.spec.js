@@ -1,6 +1,6 @@
 const { absoluteValidate, validateFileOrFolder, extValidate, recursionValidate, readFileMd, EveryOneMd, getOneLink, validateHttpOne, EveryOneValidateHttp } = require('./everyFunctions.js');
 const { mdLinks } = require('./funcion.js');
-//const {cliMdLinks} = require('./redireccionCLI.js')
+const { cliMdLinks } = require('./CLI.js');
 const fs = require('fs');// importo modulo fs
 const path = require('path');
 const mockRutaOneFile = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md';
@@ -175,7 +175,7 @@ describe('test de funciones asincronas', () => {
 
 
 describe('test mdlinks función', () => {
-    it('testea si mdlinks es una función', () => {
+    it('testea función md links', () => {
         let outMockRutaOneFile = [
             {
                 "file": "C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md",
@@ -239,7 +239,8 @@ describe('test mdlinks función', () => {
         expect(mdLinks(mockRutaOneFileNoMd)).resolves.toEqual('no se encontraron archivos .md')// cuando recibe un link que no tiene archivos.md
         expect(mdLinks(mockRutaOneFileVacia)).resolves.toEqual(rtaArchivoVacio)//cuando recibe un archivo sin links
     })
-    /*     it('testea si climdlinks es una función',()=>{
-            return expect(typeof cliMdLinks).resolves.toBe('function')
-        }) */
+    it('testea la función climdlinks ', () => {
+         expect(typeof cliMdLinks).toBe('function')
+         expect(cliMdLinks(mockRutaOneFile,)).resolves.toEqual(outMockRutaOneFile)//cuando recibe ruta absoluta de archivo.md
+    })
 })
