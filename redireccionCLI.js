@@ -46,9 +46,10 @@ function cliMdLinks(file, options) {
     mdLinks(file, { validate: false }).then(res=> {
       let estadisticas = statsLinks(res)
       delete estadisticas.Broken;
-      console.log(estadisticas);
+      console.log(estadisticas,'llamar funcion con validate false y calcular stats');
     });
   }
 
 }
 cliMdLinks(ruta, opciones)
+module.exports = {cliMdLinks}

@@ -29,7 +29,7 @@ const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES';
 function leerDirectorio(ruta) {
   return new Promise((resolve, reject) => {
     fs.readdir(ruta, (error, archivos) => {
-      console.log(archivos);
+      //console.log(archivos);
       archivos.forEach((archivo) => {
         if (!error) {
           resolve(path.extname(archivo) === '.md' ? 'ext.md' : 'noext.md')

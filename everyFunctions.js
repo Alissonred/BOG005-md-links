@@ -92,7 +92,7 @@ function getOneLink(file, ruta) {
         foundFile.forEach((link) => {
             arrayLinks.push({
                 href: link.match(/https:\/\/.*[^)]/g).toString(),// porque la devolución es en array
-                text: link.match(/\[.*\]/g).toString(),// porque la devolución es en array
+                text: link.match(/\[(.*)\]/)[1],// porque la devolución es en array
                 file: ruta,
             })
         })
@@ -136,7 +136,7 @@ function EveryOneValidateHttp(arrayObjlinks) {
 function statsLinks(arrayPrueba){// recibe array de links con o sin validar
     let arrhref =[];
      arrayPrueba.forEach((link)=>{return arrhref.push(link.href)});
-     console.log(arrhref);
+     //console.log(arrhref);
      const brokenLinks = arrayPrueba.filter((link)=>link.ok == 'fail')
      let theSet = new Set(arrhref)
       return {

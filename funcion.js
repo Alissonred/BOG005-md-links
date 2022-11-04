@@ -14,18 +14,19 @@ const mdLinks = (route, options = {validate: false} ) => {
       //console.log(res, 'obj links puros')
       //EveryOneValidateHttp(res.flat()).then(res => console.log(res))// devuelve atributos con estado de validacion de links
     }) */
+    
     if (options.validate === true) {/// ask como colocarlo 
       if (recursionValidacion.length === 0) { resolve('no se encontraron archivos .md') }//// revisar si es así
       console.log('se va al if validate true');
       EveryOneMd(recursionValidacion).then(res => {//Devuelve objetos de links en array 
-        if (res.length === 0) { resolve('no hay links') }
+        //if (res.length === 0) { resolve('no hay links') }
         EveryOneValidateHttp(res.flat()).then(linkValidate => resolve(linkValidate))// devuelve atributos con estado de validacion de links
       })
     }
     else {
       if (recursionValidacion.length === 0) { resolve('no se encontraron archivos .md') }//// revisar si es así
       EveryOneMd(recursionValidacion).then(res => {//Devuelve objetos de links en array 
-        if (res.length === 0) { resolve('no hay links') }
+        //if (res.length === 0) { resolve('no hay links') }
         resolve(res.flat())
       })
     }
