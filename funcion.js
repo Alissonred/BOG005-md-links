@@ -6,7 +6,7 @@ const rutaPruebaMD = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\F
 const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba';
 
 
-const mdLinks = (route, options/* , options= {validate: true} */) => {
+const mdLinks = (route, options = {validate: false} ) => {
   return new Promise((resolve, reject) => {
     let rutaAbsoluta = absoluteValidate(route);//Devuelve ruta absoluta
     let recursionValidacion = recursionValidate(rutaAbsoluta)//devueve array de rutas .md
@@ -16,6 +16,7 @@ const mdLinks = (route, options/* , options= {validate: true} */) => {
     }) */
     if (options.validate === true) {/// ask como colocarlo 
       if (recursionValidacion.length === 0) { resolve('no se encontraron archivos .md') }//// revisar si es así
+      console.log('se va al if validate true');
       EveryOneMd(recursionValidacion).then(res => {//Devuelve objetos de links en array 
         if (res.length === 0) { resolve('no hay links') }
         EveryOneValidateHttp(res.flat()).then(linkValidate => resolve(linkValidate))// devuelve atributos con estado de validacion de links
@@ -31,6 +32,8 @@ const mdLinks = (route, options/* , options= {validate: true} */) => {
 
   })
 }
+
+//mdLinks(rutaPrueba).then(res=> console.log(res, 'es el resultado de md'))
 //mdlinks(rutaPrueba)
 module.exports = {mdLinks}
 
@@ -38,28 +41,3 @@ module.exports = {mdLinks}
 
 
 
-
-/* const mdlinks = (route, options= {validate: true})=>{
-return new Promise((resolve, reject) => {
-  EveryOneMd(route).then(res => {
-    EveryOneValidateHttp(res.flat()).then(res => resolve(res))// retorna
-    //console.log(res.flat()) // el resultado de la promesa lo vuelvo 1 solo array
-})
-}) */
-//validar si es ruta absoluta
-// volver la ruta absoluta
-//leer extensioon de archivo
-    //tomar solo si es archivo .md
-    //validar si es una carpeta
-      //recorrer cada archivo(forEach)
-      //aplicar recursion
-    //retornar array de archivos .md
-//leer documento en busca de links
-//validate true/ false segun la selección
-
-
-
-
-//mdlinks(rutaPruebaMD)
-
-//module.exports =mdlinks;
