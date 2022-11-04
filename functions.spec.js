@@ -248,14 +248,14 @@ describe('test mdlinks función', () => {
               {
                 href: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions',
                 text: 'exp en prueba 1',
-                file: 'C:\\\\Users\\\\57322\\\\Desktop\\\\AR GENERALES\\\\BASES\\\\COURSES\\\\FORMAL\\\\LABORATORIA\\\\PROY 4 MDLINKS NODE\\\\BOG005-md-links\\\\carpetaPrueba\\\\pruebamd1.md',
+                file: 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md',
                 status: 200,
                 ok: 'OK'
               },
               {
                 href: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Text_formatting',
                 text: 'otro ejemplo prueba 1',
-                file: 'C:\\\\Users\\\\57322\\\\Desktop\\\\AR GENERALES\\\\BASES\\\\COURSES\\\\FORMAL\\\\LABORATORIA\\\\PROY 4 MDLINKS NODE\\\\BOG005-md-links\\\\carpetaPrueba\\\\pruebamd1.md',
+                file: 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md',
                 status: 200,
                 ok: 'OK'
               }
@@ -266,21 +266,23 @@ describe('test mdlinks función', () => {
             {
               href: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions',
               text: 'exp en prueba 1',
-              file: 'C:\\\\Users\\\\57322\\\\Desktop\\\\AR GENERALES\\\\BASES\\\\COURSES\\\\FORMAL\\\\LABORATORIA\\\\PROY 4 MDLINKS NODE\\\\BOG005-md-links\\\\carpetaPrueba\\\\pruebamd1.md',
+              file: 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md',
               status: 200,
               ok: 'OK'
             },
             {
               href: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Text_formatting',
               text: 'otro ejemplo prueba 1',
-              file: 'C:\\\\Users\\\\57322\\\\Desktop\\\\AR GENERALES\\\\BASES\\\\COURSES\\\\FORMAL\\\\LABORATORIA\\\\PROY 4 MDLINKS NODE\\\\BOG005-md-links\\\\carpetaPrueba\\\\pruebamd1.md',
+              file: 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md',
               status: 200,
               ok: 'OK'
             }
           ]
+        let mockStatsOpcionRetorno ={ Total: 2, Unique: 2 };
          expect(typeof cliMdLinks).toBe('function')
-         //expect(cliMdLinks(mockRutaOneFile, mockAmbasOpciones)).resolves.toEqual(mockAmbasOpcionesRetorno)//ruta archivo.md, ambas opciones
-         expect(cliMdLinks(mockRutaOneFile, mockValidateOpcion)).resolves.toEqual(mockValidateOpcionRetorno)//ruta archivo.md, validate unicamente
-         //expect(cliMdLinks(mockRutaOneFile, mockStatsOpcion)).resolves.toEqual('')//ruta archivo.md, stats unicamente
-    })
+         expect(cliMdLinks(mockRutaRelativaMd, mockAmbasOpciones)).resolves.toEqual(mockAmbasOpcionesRetorno)//ruta archivo.md, ambas opciones
+         expect(cliMdLinks(mockRutaRelativaMd, mockValidateOpcion)).resolves.toEqual(mockValidateOpcionRetorno)//ruta archivo.md, validate unicamente
+         expect(cliMdLinks(mockRutaOneFile, mockStatsOpcion)).resolves.toEqual(mockStatsOpcionRetorno)//ruta archivo.md, stats unicamente
+          //si se ejecutan simultaneamente pasan, pero generan errores
+        })
 })
