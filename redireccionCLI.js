@@ -51,4 +51,4 @@ let statsValue = false;// valor por defecto
 
 }
  */
-cliMdLinks(ruta, opciones)
+cliMdLinks(ruta, opciones).then(res => console.log(res))
