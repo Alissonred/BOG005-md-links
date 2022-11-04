@@ -243,6 +243,7 @@ describe('test mdlinks función', () => {
         let mockAmbasOpciones =['node.exe', 'redireccion.js', 'ruta', '--validate', '--stats'];
         let mockValidateOpcion =['node.exe', 'redireccion.js', 'ruta', '--validate'];
         let mockStatsOpcion =['node.exe', 'redireccion.js', 'ruta', '--stats'];
+        let mockSinOpcion =['node.exe', 'redireccion.js', 'ruta'];
         let mockAmbasOpcionesRetorno = [
             [
               {
@@ -279,10 +280,23 @@ describe('test mdlinks función', () => {
             }
           ]
         let mockStatsOpcionRetorno ={ Total: 2, Unique: 2 };
+        let mockSinOpcionRetorno = [
+            {
+              href: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions',
+              text: 'exp en prueba 1',
+              file: 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md'
+            },
+            {
+              href: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Text_formatting',
+              text: 'otro ejemplo prueba 1',
+              file: 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md'
+            }
+          ]
          expect(typeof cliMdLinks).toBe('function')
          expect(cliMdLinks(mockRutaRelativaMd, mockAmbasOpciones)).resolves.toEqual(mockAmbasOpcionesRetorno)//ruta archivo.md, ambas opciones
          expect(cliMdLinks(mockRutaRelativaMd, mockValidateOpcion)).resolves.toEqual(mockValidateOpcionRetorno)//ruta archivo.md, validate unicamente
          expect(cliMdLinks(mockRutaOneFile, mockStatsOpcion)).resolves.toEqual(mockStatsOpcionRetorno)//ruta archivo.md, stats unicamente
-          //si se ejecutan simultaneamente pasan, pero generan errores
+         expect(cliMdLinks(mockRutaOneFile, mockSinOpcion)).resolves.toEqual(mockSinOpcionRetorno)//ruta archivo.md, stats unicamente 
+         //si se ejecutan simultaneamente pasan, pero generan errores
         })
 })
