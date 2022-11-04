@@ -6,8 +6,6 @@ const { cliMdLinks } = require('./CLI.js')
 
 //const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba';
 //const rutaPruebaFile = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md';
-
-
 const opciones = process.argv;/// array con los procesos que está corriendo [node,archivo js, path, comando1, comando2]
 const ruta = opciones[2]
 console.log(opciones, 'es options')

@@ -240,7 +240,12 @@ describe('test mdlinks función', () => {
         expect(mdLinks(mockRutaOneFileVacia)).resolves.toEqual(rtaArchivoVacio)//cuando recibe un archivo sin links
     })
     it('testea la función climdlinks ', () => {
+        let mockAmbasOpciones =['node.exe', 'redireccion.js', 'ruta', '--validate', '--stats'];
+        let mockValidateOpcion =['node.exe', 'redireccion.js', 'ruta', '--validate'];
+        let mockStatsOpcion =['node.exe', 'redireccion.js', 'ruta', '--stats'];
          expect(typeof cliMdLinks).toBe('function')
-         expect(cliMdLinks(mockRutaOneFile,)).resolves.toEqual(outMockRutaOneFile)//cuando recibe ruta absoluta de archivo.md
+         expect(cliMdLinks(mockRutaOneFile, mockAmbasOpciones)).resolves.toEqual('')//ruta archivo.md, ambas opciones
+         //expect(cliMdLinks(mockRutaOneFile, mockValidateOpcion)).resolves.toEqual('')//ruta archivo.md, validate unicamente
+         //expect(cliMdLinks(mockRutaOneFile, mockStatsOpcion)).resolves.toEqual('')//ruta archivo.md, stats unicamente
     })
 })

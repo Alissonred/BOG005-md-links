@@ -132,7 +132,6 @@ function EveryOneValidateHttp(arrayObjlinks) {
 }
 
 
-
 function statsLinks(arrayPrueba){// recibe array de links con o sin validar
     let arrhref =[];
      arrayPrueba.forEach((link)=>{return arrhref.push(link.href)});
