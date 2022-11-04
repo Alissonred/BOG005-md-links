@@ -108,17 +108,17 @@ function getOneLink(file, ruta) {
 }
 
 function validateHttpOne(objLinkToValidate) {// recibe todo el objeto, solo 1 objeto link
-return new Promise((resolve, reject) => {
-    axiosHttp.get(objLinkToValidate.href).then((res) => {
-        objLinkToValidate.status = res.status;// codigos de estado http
-        objLinkToValidate.ok = res.statusText;
-        resolve(objLinkToValidate) 
-    }).catch((error) => {
-        objLinkToValidate.ok = 'fail';
-        resolve(objLinkToValidate) // con reject muestra error
-    })
+    return new Promise((resolve, reject) => {
+        axiosHttp.get(objLinkToValidate.href).then((res) => {
+            objLinkToValidate.status = res.status;// codigos de estado http
+            objLinkToValidate.ok = res.statusText;
+            resolve(objLinkToValidate)
+        }).catch((error) => {
+            objLinkToValidate.ok = 'fail';
+            resolve(objLinkToValidate) // con reject muestra error
+        })
 
-})
+    })
 }
 
 function EveryOneValidateHttp(arrayObjlinks) {
@@ -131,12 +131,20 @@ function EveryOneValidateHttp(arrayObjlinks) {
     return Promise.all(validateStatePromises)// ARRAY DE PROMESAS  
 }
 
-function statsLinks(arrayObjlinks){
-    let Total = arrayObjlinks.Length;
-    let Unique = arrayObjlinks.Length;
-    ///pte añadir los broken
-  }
 
+
+function statsLinks(arrayPrueba){// recibe array de links con o sin validar
+    let arrhref =[];
+     arrayPrueba.forEach((link)=>{return arrhref.push(link.href)});
+     console.log(arrhref);
+     const brokenLinks = arrayPrueba.filter((link)=>link.ok == 'fail')
+     let theSet = new Set(arrhref)
+      return {
+        Total: arrhref.length,
+        Unique : theSet.size,///askk
+        Broken : brokenLinks.length
+      }
+    }
 
 //existRoute(rutaPrueba).then(res => console.log(res))// okkkk
 //console.log(absoluteValidate(rutaPrueba)); // okkk
@@ -149,5 +157,5 @@ function statsLinks(arrayObjlinks){
     EveryOneValidateHttp(res.flat()).then(res => console.log(res, 'es lo de abajo'))// retorna
     //console.log(res.flat()) // el resultado de la promesa lo vuelvo 1 solo array
 }) */
-
-module.exports = {absoluteValidate, validateFileOrFolder, extValidate, recursionValidate, readFileMd, EveryOneMd, getOneLink, validateHttpOne, EveryOneValidateHttp, statsLinks}
+//console.log(statsLinks(arrayLinksPrueba));
+module.exports = { absoluteValidate, validateFileOrFolder, extValidate, recursionValidate, readFileMd, EveryOneMd, getOneLink, validateHttpOne, EveryOneValidateHttp, statsLinks }

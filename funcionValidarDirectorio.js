@@ -44,6 +44,5 @@ function leerDirectorio(ruta) {
   })
 }
 
-leerDirectorio(rutaPrueba).then(res => console.log(res))
-
+//leerDirectorio(rutaPrueba).then(res => console.log(res))
 

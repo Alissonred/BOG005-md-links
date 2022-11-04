@@ -27,22 +27,27 @@ function cliMdLinks(file, options) {
   console.log(statsValue, 'es el valor de stats');
 
   if (validateValue === true && statsValue === true) {
-    console.log('llamar a funcion con todo');
-    mdLinks(file, { validate: true }).then(res=> console.log(res, 'md en cli'));
+    //console.log('llamar a funcion con todo');
+    mdLinks(file, { validate: true }).then(res=> {
+      console.log(statsLinks(res))});
     //statsLinks();/// verificar
   }
   else if (validateValue === false && statsValue === false) {
-    console.log('ejecutar funcion por defecto');
+    //console.log('ejecutar funcion por defecto');
     /// pendiente verificar si es porque se añadieron comandos no validos
-    mdLinks(file, { validate: false }).then(res=> console.log(res, 'md en cli'));
+    mdLinks(file, { validate: false }).then(res=> console.log(res, 'ejecutar funcion por defecto'));
   }
   else if (validateValue === true && statsValue === false) {
-    console.log('llamar funcion con validate true solamente');
-    mdLinks(file, { validate: true }).then(res=> console.log(res, 'md en cli'));
+    //console.log('llamar funcion con validate true solamente');
+    mdLinks(file, { validate: true }).then(res=> console.log(res, 'llamar funcion con validate true solamente'));
   }
   else if (validateValue === false && statsValue === true) {
-    console.log('llamar funcion con validate false y calcular stats');
-    mdLinks(file, { validate: false }).then(res=> console.log(res, 'md en cli'));
+    //console.log('llamar funcion con validate false y calcular stats');
+    mdLinks(file, { validate: false }).then(res=> {
+      let estadisticas = statsLinks(res)
+      delete estadisticas.Broken;
+      console.log(estadisticas);
+    });
   }
 
 }
