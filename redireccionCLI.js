@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 //const mdExectuted = require('./funcion.js');
 //const { mdLinks } = require('./funcion.js')

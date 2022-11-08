@@ -295,8 +295,8 @@ describe('test mdlinks función', () => {
          expect(typeof cliMdLinks).toBe('function')
          expect(cliMdLinks(mockRutaRelativaMd, mockAmbasOpciones)).resolves.toEqual(mockAmbasOpcionesRetorno)//ruta archivo.md, ambas opciones
          expect(cliMdLinks(mockRutaRelativaMd, mockValidateOpcion)).resolves.toEqual(mockValidateOpcionRetorno)//ruta archivo.md, validate unicamente
-         expect(cliMdLinks(mockRutaOneFile, mockStatsOpcion)).resolves.toEqual(mockStatsOpcionRetorno)//ruta archivo.md, stats unicamente
-         expect(cliMdLinks(mockRutaOneFile, mockSinOpcion)).resolves.toEqual(mockSinOpcionRetorno)//ruta archivo.md, stats unicamente 
+         expect(cliMdLinks(mockRutaRelativaMd, mockStatsOpcion)).resolves.toEqual(mockStatsOpcionRetorno)//ruta archivo.md, stats unicamente
+         expect(cliMdLinks(mockRutaRelativaMd, mockSinOpcion)).resolves.toEqual(mockSinOpcionRetorno)//ruta archivo.md, stats unicamente 
          //si se ejecutan simultaneamente pasan, pero generan errores
         })
 })

@@ -25,6 +25,9 @@
   ],
   "author": "Alisson Redondo",
   "license": "ISC",
+  "bin": {
+    "md-links": "./redireccionCLI.js"
+  },
   "bugs": {
     "url": "https://github.com/Alissonred/BOG005-md-links/issues"
   },
