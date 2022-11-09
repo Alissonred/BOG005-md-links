@@ -41,7 +41,7 @@ El programa se ejecuta mediante una herramienta de línea de comando CLI (Comman
 
 El módulo se importa en otros scripts de Node.js de la siguiente manera
 
-`const {md_Links} = require('aredondomartinez-md-links')`
+`const {mdLinks} = require('aredondomartinez-md-links')`
 
 ##### Argumentos
 
