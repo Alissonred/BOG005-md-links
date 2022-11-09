@@ -31,9 +31,9 @@ Este módulo incluye un ejecutable como una interfaz que se puede importar.
 
 El programa se ejecuta mediante una herramienta de línea de comando CLI (Command Line Interface - Interfaz de Línea de Comando), y su programación esta basada en promesas y recursividad.
 ### 3.1. Diagrama de flujo API
-![diagrama-api](/images/MD%20links%20api%20.png)
+![diagrama-api](https://github.com/Alissonred/BOG005-md-links/raw/main/images/MD%20links%20api%20.png)
 ### 3.2. Diagrama de flujo CLI
-![diagrama-cli](/images/MD%20links%20CLI.png)
+![diagrama-cli](https://github.com/Alissonred/BOG005-md-links/raw/main/images/MD%20links%20CLI.png)
 
 
 ## 4. Documentación técnica
