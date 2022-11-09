@@ -21,11 +21,11 @@ ligero usado en diversas plataformas que manejan texto plano. Normalmente dichos
 ## 2. Instalación
 Para la instalación de la librería, se ejecuta el siguiente comando:
 
-`npm i links-md`
+`npm i aredondomartinez-md-links`
 
 Este módulo incluye un ejecutable como una interfaz que se puede importar.
 
-`const {md_Links} = require('aredondomartinez-md-links')`
+`const {mdLinks} = require('aredondomartinez-md-links')`
 
 ## 3. Funcionamiento básico
 
