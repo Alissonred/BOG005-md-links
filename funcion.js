@@ -1,27 +1,41 @@
-const path = require('path');
-const mdlinks = (path, options)=>{
-////////////////////////////////logica y pasos dividiendo en fichas
-//obtener parametros (eso lo hace el cli)
-//validar si existe ruta (fs.stats)
-//validar si es ruta absoluta
-// volver la ruta absoluta
-//leer extensioon de archivo 
-    //tomar solo si es archivo .md
-    //validar si es una carpeta
-      //recorrer cada archivo(forEach)
-      //aplicar recursion
-    //retornar array de archivos .md
-//leer documento en busca de links
-//validate true/ false segun la selección
+const { absoluteValidate, validateFileOrFolder, extValidate, recursionValidate, readFileMd, EveryOneMd, getOneLink, validateHttpOne, EveryOneValidateHttp } = require('./everyFunctions.js');
+const rutaPruebaMD = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba\\pruebamd1.md';
+const rutaPrueba = 'C:\\Users\\57322\\Desktop\\AR GENERALES\\BASES\\COURSES\\FORMAL\\LABORATORIA\\PROY 4 MDLINKS NODE\\BOG005-md-links\\carpetaPrueba';
 
-return promises.resolve( /// en caso de que la promesa sea resuelta( un mock de eso) retorne un array con 
-[
-{
-    href: 'ruta parte1',
-    text: 'ruta parte2'
-}
-]
-)
+
+const mdLinks = (route, options = {validate: false} ) => {
+  return new Promise((resolve, reject) => {
+    let rutaAbsoluta = absoluteValidate(route);//Devuelve ruta absoluta
+    let recursionValidacion = recursionValidate(rutaAbsoluta)//devueve array de rutas .md
+/*     let deteccionLinks = EveryOneMd(recursionValidacion).then(res => {//Devuelve objetos de links en array 
+      //console.log(res, 'obj links puros')
+      //EveryOneValidateHttp(res.flat()).then(res => console.log(res))// devuelve atributos con estado de validacion de links
+    }) */
+    
+    if (options.validate === true) {/// ask como colocarlo 
+      if (recursionValidacion.length === 0) { resolve('no se encontraron archivos .md') }//// revisar si es así
+      console.log('se va al if validate true');
+      EveryOneMd(recursionValidacion).then(res => {//Devuelve objetos de links en array 
+        //if (res.length === 0) { resolve('no hay links') }
+        EveryOneValidateHttp(res.flat()).then(linkValidate => resolve(linkValidate))// devuelve atributos con estado de validacion de links
+      })
+    }
+    else {
+      if (recursionValidacion.length === 0) { resolve('no se encontraron archivos .md') }//// revisar si es así
+      EveryOneMd(recursionValidacion).then(res => {//Devuelve objetos de links en array 
+        //if (res.length === 0) { resolve('no hay links') }
+        resolve(res.flat())
+      })
+    }
+
+  })
 }
 
-module.exports =mdlinks;
+//mdLinks(rutaPrueba).then(res=> console.log(res, 'es el resultado de md'))
+//mdlinks(rutaPrueba)
+module.exports = {mdLinks}
+
+
+
+
+
